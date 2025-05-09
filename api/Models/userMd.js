@@ -1,3 +1,4 @@
+import { min } from "lodash";
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
@@ -18,13 +19,15 @@ const userSchema = new mongoose.Schema(
         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
         "Please fill a valid email address",
       ],
+      select: false,// Hide email in the response
     },
     password: {
       type: String,
       required: [true, "Please enter a password"],
+      minlength: [8, "Password should be at least 8 characters"],
     },
     phoneNumber: {
-      type: Number,
+      type: String,
       required: [true, "Please enter a phone number"],
       unique: [true, "This phone number already exists"],
       match: [/^\d{10,15}$/, "Invalid phone number"],
@@ -41,8 +44,3 @@ const userSchema = new mongoose.Schema(
 const User = mongoose.model("User", userSchema);
 
 export default User;
-
-// createdAt: {
-//   type: Date,
-//   default: Date.now,
-// }

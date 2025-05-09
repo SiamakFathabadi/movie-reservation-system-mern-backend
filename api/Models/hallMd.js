@@ -23,6 +23,6 @@ const hallSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Hall = mongoose.model("hall", hallSchema);
+const Hall = mongoose.model("Hall", hallSchema);
 
 export default Hall;
